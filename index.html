@@ -15,52 +15,63 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0d1117;
+            overflow-x: hidden; /* Prevents horizontal scroll from parallax */
         }
 
-        /* Each section is a full-screen view */
-        .full-screen-section {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            /* Create the 3D space for the parallax effect */
-            transform-style: preserve-3d;
-            perspective: 1px;
+        /* The main container for all sections, allowing for natural scrolling */
+        .page-container {
             position: relative;
         }
 
-        /* The background element that will move slower */
-        .parallax-background {
+        /* Each section will have a fixed height for a full-screen view */
+        .section {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* The sticky container for the content that will be animated */
+        .sticky-container {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* The content elements to be animated based on scroll position */
+        .animated-content {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: none; /* Disable CSS transitions for JS control */
+            will-change: transform, opacity; /* Optimizes for performance */
+            max-width: 90%;
+        }
+
+        /* Background elements to create the parallax effect */
+        .parallax-bg {
             position: absolute;
             top: 0;
-            right: 0;
-            bottom: 0;
             left: 0;
-            /* Control the speed of the background */
-            transform: translateZ(-1px) scale(2);
-            z-index: -1;
+            width: 100%;
+            height: 100%;
             background-size: cover;
             background-position: center;
+            transform: scale(1.1);
         }
 
-        /* The foreground content that moves at normal speed */
-        .parallax-content {
+        /* Ensure images and text are on top of the backgrounds */
+        .content-wrapper {
             position: relative;
-            z-index: 1;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            /* Initial state for the fade-in transition */
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        /* Active state for the fade-in transition */
-        .parallax-content.is-visible {
-            opacity: 1;
-            transform: translateY(0);
+            z-index: 10;
         }
     </style>
 </head>
@@ -78,76 +89,75 @@
         </nav>
     </header>
 
-    <!-- About Section with Parallax Background -->
-    <section id="about" class="full-screen-section">
-        <div class="parallax-background" style="background-image: url('https://placehold.co/1920x1080/1a202c/667eea?text=About');"></div>
-        <div class="parallax-content p-8 text-center">
-            <div class="max-w-3xl">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">About Me</h2>
-                <p class="text-lg md:text-xl text-gray-400 leading-relaxed">
-                    Hello, I'm a passionate developer with a knack for building clean and functional websites. I am always eager to learn new technologies.
-                </p>
-            </div>
-        </div>
-    </section>
+    <main class="page-container">
 
-    <!-- Experience Section with Parallax Background -->
-    <section id="experience" class="full-screen-section bg-gray-900">
-        <div class="parallax-background" style="background-image: url('https://placehold.co/1920x1080/2d3748/f6e05e?text=Experience');"></div>
-        <div class="parallax-content p-8 text-center">
-            <div class="max-w-3xl">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">My Experience</h2>
-                <div class="text-left space-y-6">
-                    <div>
-                        <h3 class="text-2xl font-semibold text-indigo-400">Software Engineer</h3>
-                        <p class="text-gray-500">Tech Solutions Inc. | 2022 - Present</p>
-                        <p class="mt-2 text-gray-400">
-                            Developed and maintained full-stack web applications, collaborating with a team to implement new features and improve performance.
-                        </p>
+        <!-- About Section -->
+        <section id="about" class="section bg-[#0d1117]">
+            <div class="parallax-bg" style="background-image: url('https://placehold.co/1920x1080/0d1117/30363d?text=CODE');"></div>
+            <div class="sticky-container">
+                <div class="animated-content">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">About Me</h2>
+                    <p class="text-lg md:text-xl text-gray-400 leading-relaxed max-w-2xl">
+                        I am a passionate developer with a knack for building beautiful and functional websites. This is a personal portfolio showcasing my skills and background.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="section bg-gray-900">
+            <div class="parallax-bg" style="background-image: url('https://placehold.co/1920x1080/161b22/f6e05e?text=LAPTOP');"></div>
+            <div class="sticky-container">
+                <div class="animated-content">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">My Experience</h2>
+                    <div class="text-lg md:text-xl text-gray-400 leading-relaxed max-w-2xl">
+                        <div class="mb-4">
+                            <h3 class="text-2xl font-semibold text-indigo-400">Software Engineer</h3>
+                            <p>Tech Solutions Inc. | 2022 - Present</p>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-indigo-400">Web Development Intern</h3>
+                            <p>Creative Agency | 2021 - 2022</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Education Section with Parallax Background -->
-    <section id="education" class="full-screen-section">
-        <div class="parallax-background" style="background-image: url('https://placehold.co/1920x1080/1a202c/9f7aea?text=Education');"></div>
-        <div class="parallax-content p-8 text-center">
-            <div class="max-w-3xl">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">My Education</h2>
-                <div class="text-left space-y-6">
-                    <div>
-                        <h3 class="text-2xl font-semibold text-indigo-400">Bachelor of Science in Computer Science</h3>
-                        <p class="text-gray-500">State University | 2018 - 2022</p>
-                        <p class="mt-2 text-gray-400">
-                            Focused on software engineering, data structures, and algorithms. Graduated with honors.
-                        </p>
-                    </div>
+        <!-- Education Section -->
+        <section id="education" class="section bg-[#0d1117]">
+            <div class="parallax-bg" style="background-image: url('https://placehold.co/1920x1080/0d1117/9f7aea?text=BOOK');"></div>
+            <div class="sticky-container">
+                <div class="animated-content">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">My Education</h2>
+                    <p class="text-lg md:text-xl text-gray-400 leading-relaxed max-w-2xl">
+                        I earned a Bachelor of Science in Computer Science from State University, where I focused on software engineering and algorithms.
+                    </p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+    </main>
 
     <script>
-        // Use the Intersection Observer API to add a clean fade-in transition
-        // when each section's content becomes visible.
         document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('.parallax-content');
-            const observerOptions = {
-                root: null,
-                threshold: 0.1, // Trigger when 10% of the element is visible
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
+            const sections = document.querySelectorAll('.section');
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
+                    const content = entry.target.querySelector('.animated-content');
                     if (entry.isIntersecting) {
-                        // Add the 'is-visible' class to trigger the transition
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); // Stop observing after it's visible
+                        // Animate in when the section is in view
+                        content.style.opacity = 1;
+                        content.style.transform = 'translateY(0)';
+                    } else {
+                        // Reset when it's out of view
+                        content.style.opacity = 0;
+                        content.style.transform = 'translateY(50px)';
                     }
                 });
-            }, observerOptions);
+            }, {
+                threshold: 0.5 // Trigger when 50% of the section is visible
+            });
 
             sections.forEach(section => {
                 observer.observe(section);
