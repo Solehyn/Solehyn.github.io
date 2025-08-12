@@ -1,7 +1,123 @@
 <!DOCTYPE html>
-<html>
-    <Head>
-        <h1> Hello, World </h1>
-    </Head>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <!-- Use the Inter font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Include Tailwind CSS from CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Apply the Inter font to the entire body */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* GitHub-like dark background */
+        }
+        /* Custom CSS to handle the scroll-snap effect */
+        .scroll-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory; /* Mandates the scroll-snap alignment */
+        }
+        /* Each section will snap to the start of the viewport */
+        .scroll-section {
+            height: 100vh;
+            scroll-snap-align: start;
+        }
+        /* Custom class for the fading effect on scroll */
+        .fade-in {
+            transition: opacity 0.6s ease-in-out;
+            opacity: 0;
+        }
+        .fade-in.is-visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="text-gray-200">
+
+    <!-- Floating Header -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-gray-900 bg-opacity-70 backdrop-blur-sm p-4 md:p-6 rounded-b-xl shadow-lg transition-all duration-300">
+        <nav class="flex items-center justify-between max-w-7xl mx-auto px-4">
+            <h1 class="text-xl md:text-2xl font-bold text-white">My Portfolio</h1>
+            <div class="space-x-4 md:space-x-8">
+                <a href="#about" class="text-sm md:text-base font-medium hover:text-indigo-400 transition-colors duration-200">About</a>
+                <a href="#experience" class="text-sm md:text-base font-medium hover:text-indigo-400 transition-colors duration-200">Experience</a>
+                <a href="#education" class="text-sm md:text-base font-medium hover:text-indigo-400 transition-colors duration-200">Education</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Scrollable Main Container -->
+    <main class="scroll-container">
+
+        <!-- About Section -->
+        <section id="about" class="scroll-section flex flex-col items-center justify-center p-8 text-center bg-[#0d1117]">
+            <div class="max-w-3xl">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">About Me</h2>
+                <p class="text-lg md:text-xl text-gray-400 leading-relaxed">
+                    Hello, I'm a passionate developer with a knack for building clean and functional websites. This is a personal portfolio showcasing my skills and background. I believe in creating user-friendly experiences and I am always eager to learn new technologies.
+                </p>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="scroll-section flex flex-col items-center justify-center p-8 text-center bg-gray-900">
+            <div class="max-w-3xl">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">My Experience</h2>
+                <div class="text-left space-y-6">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-indigo-400">Software Engineer</h3>
+                        <p class="text-gray-500">Tech Solutions Inc. | 2022 - Present</p>
+                        <ul class="list-disc list-inside mt-2 text-gray-400 space-y-1">
+                            <li>Developed and maintained full-stack web applications using modern frameworks.</li>
+                            <li>Collaborated with a team to implement new features and fix bugs.</li>
+                            <li>Improved application performance by 20% through code optimization.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-indigo-400">Web Development Intern</h3>
+                        <p class="text-gray-500">Creative Agency | 2021 - 2022</p>
+                        <ul class="list-disc list-inside mt-2 text-gray-400 space-y-1">
+                            <li>Assisted in the design and development of client websites.</li>
+                            <li>Wrote clean, commented, and efficient code.</li>
+                            <li>Gained hands-on experience with HTML, CSS, and JavaScript.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="scroll-section flex flex-col items-center justify-center p-8 text-center bg-[#0d1117]">
+            <div class="max-w-3xl">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">My Education</h2>
+                <div class="text-left space-y-6">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-indigo-400">Bachelor of Science in Computer Science</h3>
+                        <p class="text-gray-500">State University | 2018 - 2022</p>
+                        <p class="mt-2 text-gray-400">
+                            Focused on software engineering, data structures, and algorithms. Graduated with honors.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-indigo-400">Relevant Coursework</h3>
+                        <ul class="list-disc list-inside mt-2 text-gray-400 space-y-1">
+                            <li>Advanced Web Development</li>
+                            <li>Database Systems</li>
+                            <li>Object-Oriented Programming</li>
+                            <li>User Interface Design</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
 </html>
 
