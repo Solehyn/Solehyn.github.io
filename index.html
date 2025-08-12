@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmad Solehin's Portfolio</title>
+    <title>My Portfolio</title>
     <!-- Use the Inter font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,26 +14,48 @@
         /* Apply the Inter font to the entire body */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0d1117; /* GitHub-like dark background */
+            background-color: #0d1117; /* A deep, dark background */
         }
-        /* Custom CSS to handle the scroll-snap effect */
+        /* The main scroll container for the full-screen snap effect */
         .scroll-container {
             height: 100vh;
             overflow-y: scroll;
-            scroll-snap-type: y mandatory; /* Mandates the scroll-snap alignment */
+            scroll-snap-type: y mandatory;
         }
         /* Each section will snap to the start of the viewport */
         .scroll-section {
             height: 100vh;
             scroll-snap-align: start;
+            /* Create the 3D space for the parallax effect */
+            transform-style: preserve-3d;
+            perspective: 1px;
+            overflow: hidden;
+            position: relative;
         }
-        /* Custom class for the fading effect on scroll */
-        .fade-in {
-            transition: opacity 0.6s ease-in-out;
-            opacity: 0;
+
+        /* The background element that will move slower */
+        .parallax-background {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            /* Adjust this value to control the speed of the background */
+            transform: translateZ(-1px) scale(2);
+            z-index: -1;
+            /* The image covers the entire background */
+            background-size: cover;
+            background-position: center;
         }
-        .fade-in.is-visible {
-            opacity: 1;
+
+        /* The foreground content that will move at the normal speed */
+        .parallax-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
@@ -54,63 +76,46 @@
     <!-- Scrollable Main Container -->
     <main class="scroll-container">
 
-        <!-- About Section -->
-        <section id="about" class="scroll-section flex flex-col items-center justify-center p-8 text-center bg-[#0d1117]">
-            <div class="max-w-3xl">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">About Me</h2>
-                <p class="text-lg md:text-xl text-gray-400 leading-relaxed">
-                    Hello, I'm a passionate developer with a knack for building clean and functional websites. This is a personal portfolio showcasing my skills and background. I believe in creating user-friendly experiences and I am always eager to learn new technologies.
-                </p>
+        <!-- About Section with Parallax Background -->
+        <section id="about" class="scroll-section">
+            <div class="parallax-background" style="background-image: url('https://placehold.co/1920x1080/1a202c/667eea?text=About');"></div>
+            <div class="parallax-content p-8 text-center">
+                <div class="max-w-3xl">
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">About Me</h2>
+                    <p class="text-lg md:text-xl text-gray-400 leading-relaxed">
+                        I am a passionate developer with a knack for building beautiful and functional websites. This is a personal portfolio showcasing my skills and background.
+                    </p>
+                </div>
             </div>
         </section>
 
-        <!-- Experience Section -->
-        <section id="experience" class="scroll-section flex flex-col items-center justify-center p-8 text-center bg-gray-900">
-            <div class="max-w-3xl">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">My Experience</h2>
-                <div class="text-left space-y-6">
-                    <div>
-                        <h3 class="text-2xl font-semibold text-indigo-400">Software Engineer</h3>
-                        <p class="text-gray-500">Tech Solutions Inc. | 2022 - Present</p>
-                        <ul class="list-disc list-inside mt-2 text-gray-400 space-y-1">
-                            <li>Developed and maintained full-stack web applications using modern frameworks.</li>
-                            <li>Collaborated with a team to implement new features and fix bugs.</li>
-                            <li>Improved application performance by 20% through code optimization.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-semibold text-indigo-400">Web Development Intern</h3>
-                        <p class="text-gray-500">Creative Agency | 2021 - 2022</p>
-                        <ul class="list-disc list-inside mt-2 text-gray-400 space-y-1">
-                            <li>Assisted in the design and development of client websites.</li>
-                            <li>Wrote clean, commented, and efficient code.</li>
-                            <li>Gained hands-on experience with HTML, CSS, and JavaScript.</li>
-                        </ul>
+        <!-- Experience Section with Parallax Background -->
+        <section id="experience" class="scroll-section">
+            <div class="parallax-background" style="background-image: url('https://placehold.co/1920x1080/2d3748/f6e05e?text=Experience');"></div>
+            <div class="parallax-content p-8 text-center">
+                <div class="max-w-3xl">
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">My Experience</h2>
+                    <div class="text-left space-y-6">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-indigo-400">Software Engineer</h3>
+                            <p class="text-gray-500">Tech Solutions Inc. | 2022 - Present</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Education Section -->
-        <section id="education" class="scroll-section flex flex-col items-center justify-center p-8 text-center bg-[#0d1117]">
-            <div class="max-w-3xl">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">My Education</h2>
-                <div class="text-left space-y-6">
-                    <div>
-                        <h3 class="text-2xl font-semibold text-indigo-400">Bachelor of Science in Computer Science</h3>
-                        <p class="text-gray-500">State University | 2018 - 2022</p>
-                        <p class="mt-2 text-gray-400">
-                            Focused on software engineering, data structures, and algorithms. Graduated with honors.
-                        </p>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-semibold text-indigo-400">Relevant Coursework</h3>
-                        <ul class="list-disc list-inside mt-2 text-gray-400 space-y-1">
-                            <li>Advanced Web Development</li>
-                            <li>Database Systems</li>
-                            <li>Object-Oriented Programming</li>
-                            <li>User Interface Design</li>
-                        </ul>
+        <!-- Education Section with Parallax Background -->
+        <section id="education" class="scroll-section">
+            <div class="parallax-background" style="background-image: url('https://placehold.co/1920x1080/1a202c/9f7aea?text=Education');"></div>
+            <div class="parallax-content p-8 text-center">
+                <div class="max-w-3xl">
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">My Education</h2>
+                    <div class="text-left space-y-6">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-indigo-400">Bachelor of Science in Computer Science</h3>
+                            <p class="text-gray-500">State University | 2018 - 2022</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -120,4 +125,5 @@
 
 </body>
 </html>
+
 
